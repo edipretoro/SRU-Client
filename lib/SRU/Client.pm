@@ -4,6 +4,10 @@ package SRU::Client;
 
 use Moo;
 
+has 'base_url' => (
+    is => 'ro'
+);
+
 sub explain {
 
 }
