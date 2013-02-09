@@ -4,4 +4,8 @@ package SRU::Client;
 
 use Moo;
 
+sub explain {
+
+}
+
 1;
