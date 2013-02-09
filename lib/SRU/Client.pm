@@ -4,6 +4,8 @@ package SRU::Client;
 
 use Moo;
 use LWP::UserAgent;
+use URI;
+use URI::QueryParam;
 
 has 'base_url' => (
     is => 'ro'
@@ -14,7 +16,17 @@ sub explain {
 }
 
 sub search {
+    my $self = shift;
+    my $query = shift;
 
+    my $uri = URI->new( $self->base_url );
+    $uri->query_param(
+        version => '1.1',
+        operation => 'searchRetrieve',
+        query => $query
+    );
+
+    return LWP::UserAgent->new->get( $uri );
 }
 
 1;
