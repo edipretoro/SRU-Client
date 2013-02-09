@@ -13,4 +13,8 @@ sub explain {
     return LWP::UserAgent->new->get( shift->base_url );
 }
 
+sub search {
+
+}
+
 1;
