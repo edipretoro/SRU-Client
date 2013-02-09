@@ -8,4 +8,7 @@ use SRU::Client;
 
 can_ok( 'SRU::Client', 'new' );
 
-done_testing( 1 );
+my $searcher = SRU::Client->new();
+isa_ok( $searcher, 'SRU::Client' );
+
+done_testing( 2 );
