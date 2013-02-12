@@ -13,6 +13,6 @@ my $searcher = new_ok(
     ]
 );
 my $response = $searcher->explain;
-isa_ok( $response, 'HTTP::Response' );
+isa_ok( $response, 'HASHREF' );
 
 done_testing( 3 );
