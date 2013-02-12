@@ -6,6 +6,7 @@ use Moo;
 use LWP::UserAgent;
 use URI;
 use URI::QueryParam;
+use XML::Simple;
 
 has 'base_url' => (
     is => 'ro'
