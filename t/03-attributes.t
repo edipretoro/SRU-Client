@@ -8,7 +8,8 @@ use SRU::Client;
 
 my $searcher = new_ok(
     'SRU::Client' => [
-        base_url => 'http://z3950.loc.gov:7090/voyager'
+        base_url => 'http://z3950.loc.gov:7090/voyager',
+        charset_map => 'ISO-8859-1'
     ]
 );
 
@@ -19,4 +20,11 @@ cmp_ok(
     'Checking the "base_url" attribute'
 );
 
-done_testing( 2 );
+cmp_ok(
+    $searcher->charset_map,
+    'eq',
+    'ISO-8859-1',
+    'Checking the "charset_map" attribute'
+);
+
+done_testing( 3 );
