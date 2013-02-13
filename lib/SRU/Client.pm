@@ -52,6 +52,8 @@ sub search {
     $query_params{version} = '1.1';
     $query_params{operation} = 'searchRetrieve';
     $query_params{query} = $query;
+    $query_params{username} = $self->username if $self->username;
+    $query_params{password} = $self->password if $self->password;
 
     my $uri = URI->new( $self->base_url );
     $uri->query_param( %query_params );
