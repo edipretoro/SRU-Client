@@ -45,13 +45,24 @@ sub explain {
 }
 
 sub search {
-    my $self = shift;
-    my $query = shift;
-    my %query_params;
+    my ( $self, $params ) = @_;
+    my ( %query_params, $query, $startRecord, $maximumRecords );
+
+    if (ref($params) eq 'HASH') {
+        $startRecord = delete $params->{startRecord} || 1;
+        $maximumRecords = delete $params->{maximumRecords} || 10;
+        $query = delete $params->{query};
+    } else {
+        $startRecord = 1;
+        $maximumRecords = 10;
+        $query = $params;
+    }
 
     $query_params{version} = '1.1';
     $query_params{operation} = 'searchRetrieve';
     $query_params{query} = $query;
+    $query_params{startRecord} = $startRecord;
+    $query_params{maximumRecords} = $maximumRecords;
     $query_params{username} = $self->username if $self->username;
     $query_params{password} = $self->password if $self->password;
 
