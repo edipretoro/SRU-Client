@@ -14,5 +14,6 @@ my $searcher = new_ok(
 );
 my $response = $searcher->explain;
 isa_ok( $response, 'HASH' );
+ok( $searcher->isa( 'HTTP::Response' ) || 0, 'The object is not a HTTP::Response' );
 
-done_testing( 3 );
+done_testing( 4 );
