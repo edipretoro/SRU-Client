@@ -23,6 +23,11 @@ has 'username' => (
     default => sub { undef }
 );
 
+has 'password' => (
+    is => 'ro',
+    default => sub { undef }
+);
+
 sub explain {
     my ( $self ) = shift;
     my $r = LWP::UserAgent->new->get( $self->base_url );
@@ -42,13 +47,14 @@ sub explain {
 sub search {
     my $self = shift;
     my $query = shift;
+    my %query_params;
+
+    $query_params{version} = '1.1';
+    $query_params{operation} = 'searchRetrieve';
+    $query_params{query} = $query;
 
     my $uri = URI->new( $self->base_url );
-    $uri->query_param(
-        version => '1.1',
-        operation => 'searchRetrieve',
-        query => $query
-    );
+    $uri->query_param( %query_params );
 
     return LWP::UserAgent->new->get( $uri );
 }
