@@ -18,6 +18,11 @@ has 'charset_map' => (
     default => sub { undef }
 );
 
+has 'username' => (
+    is => 'ro',
+    default => sub { undef }
+);
+
 sub explain {
     my ( $self ) = shift;
     my $r = LWP::UserAgent->new->get( $self->base_url );
