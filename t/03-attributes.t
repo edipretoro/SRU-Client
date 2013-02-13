@@ -14,7 +14,15 @@ my $searcher = new_ok(
     ]
 );
 
-cmp_ok( 
+can_ok(
+    $searcher,
+    qw(
+          base_url
+          charset_map
+          username
+  ));
+
+cmp_ok(
     $searcher->base_url,
     'eq',
     'http://z3950.loc.gov:7090/voyager',
@@ -35,4 +43,4 @@ cmp_ok(
     'Checking the "username" attribute'
 );
 
-done_testing( 4 );
+done_testing( 5 );
