@@ -56,7 +56,7 @@ sub search {
     $query_params{password} = $self->password if $self->password;
 
     my $uri = URI->new( $self->base_url );
-    $uri->query_param( %query_params );
+    $uri->query_form_hash( \%query_params );
 
     return LWP::UserAgent->new->get( $uri );
 }
