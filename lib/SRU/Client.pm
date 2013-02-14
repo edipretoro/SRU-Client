@@ -8,7 +8,6 @@ use URI;
 use URI::QueryParam;
 use XML::Simple;
 use Unicode::Map;
-use XML::LibXML;
 use SRU::Client::Response::searchRetrieve;
 
 has 'base_url' => (
