@@ -73,17 +73,17 @@ sub search {
 
 
     my $r = LWP::UserAgent->new->get( $uri );
-    my $data;
+    my $response;
 
     if ($self->charset_map) {
         my $map = Unicode::Map->new( $self->charset_map );
-        my $response = $map->to_unicode( $r->decoded_content );
-        $data = XMLin( $response );
+        my $data = $map->to_unicode( $r->decoded_content );
+        $response = SRU::Client::Response::searchRetrieve->new_from_xml( $data );
     } else {
-        $data = XMLin( $r->decoded_content );
+        $response = SRU::Client::Response::searchRetrieve->new_from_xml( $r->decoded_content );
     }
 
-    return $data;
+    return $response;
 }
 
 1;
