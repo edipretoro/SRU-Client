@@ -69,7 +69,19 @@ sub search {
     my $uri = URI->new( $self->base_url );
     $uri->query_form_hash( \%query_params );
 
-    return LWP::UserAgent->new->get( $uri );
+
+    my $r = LWP::UserAgent->new->get( $uri );
+    my $data;
+
+    if ($self->charset_map) {
+        my $map = Unicode::Map->new( $self->charset_map );
+        my $response = $map->to_unicode( $r->decoded_content );
+        $data = XMLin( $response );
+    } else {
+        $data = XMLin( $r->decoded_content );
+    }
+
+    return $data;
 }
 
 1;
