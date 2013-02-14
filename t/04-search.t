@@ -5,7 +5,6 @@ use warnings;
 
 use Test::More;
 use SRU::Client;
-use Scalar::Util 'blessed';
 
 can_ok( 'SRU::Client', 'search' );
 my $searcher = new_ok(
@@ -15,7 +14,6 @@ my $searcher = new_ok(
 );
 my $response = $searcher->search( 'dinosaur' );
 isa_ok( $response, 'HASH' );
-my $class = blessed( $response );
-isnt( $class, 'HTTP::Response', "The object isn't a HTTP::Response");
+isa_ok( $response, 'SRU::Client::Response::searchRetrieve' );
 
 done_testing( 4 );
