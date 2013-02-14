@@ -8,6 +8,7 @@ use URI;
 use URI::QueryParam;
 use XML::Simple;
 use Unicode::Map;
+use XML::LibXML;
 
 has 'base_url' => (
     is => 'ro'
