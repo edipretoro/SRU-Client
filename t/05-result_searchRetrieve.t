@@ -16,6 +16,6 @@ my $response = $searcher->search( 'dinosaur' );
 isa_ok( $response, 'HASH' );
 isa_ok( $response, 'SRU::Client::Response::searchRetrieve' );
 
-can_ok( $response, qw( version ) ):
+can_ok( $response, qw( version ) );
 
-done_testing( 4 );
+done_testing( 5 );
