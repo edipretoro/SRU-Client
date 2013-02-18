@@ -17,5 +17,6 @@ isa_ok( $response, 'HASH' );
 isa_ok( $response, 'SRU::Client::Response::searchRetrieve' );
 
 can_ok( $response, qw( version ) );
+is( $response->version, '1.1', "checking if we got the right version" );
 
-done_testing( 5 );
+done_testing( 6 );
