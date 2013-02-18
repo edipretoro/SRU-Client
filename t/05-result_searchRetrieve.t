@@ -19,4 +19,6 @@ isa_ok( $response, 'SRU::Client::Response::searchRetrieve' );
 can_ok( $response, qw( version ) );
 is( $response->version, '1.1', "checking if we got the right version" );
 
-done_testing( 6 );
+can_ok( $response, qw( numberOfRecords ) );
+
+done_testing( 7 );
