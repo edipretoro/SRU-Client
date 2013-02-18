@@ -4,6 +4,10 @@ use warnings;
 
 use Moo;
 
+has 'version' => (
+    is => 'ro'
+);
+
 sub new_from_xml {
     my ( $class ) = @_;
 
