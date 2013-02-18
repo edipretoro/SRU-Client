@@ -20,5 +20,6 @@ can_ok( $response, qw( version ) );
 is( $response->version, '1.1', "checking if we got the right version" );
 
 can_ok( $response, qw( numberOfRecords ) );
+is( $response->numberOfRecords, '2402', "checking the number of records we got" );
 
-done_testing( 7 );
+done_testing( 8 );
