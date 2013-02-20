@@ -7,16 +7,10 @@ use LWP::UserAgent;
 use URI;
 use URI::QueryParam;
 use XML::Simple;
-use Unicode::Map;
 use SRU::Client::Response::searchRetrieve;
 
 has 'base_url' => (
     is => 'ro'
-);
-
-has 'charset_map' => (
-    is => 'ro',
-    default => sub { undef }
 );
 
 has 'username' => (
@@ -32,17 +26,8 @@ has 'password' => (
 sub explain {
     my ( $self ) = shift;
     my $r = LWP::UserAgent->new->get( $self->base_url );
-    my $data;
 
-    if ($self->charset_map) {
-        my $map = Unicode::Map->new( $self->charset_map );
-        my $response = $map->to_unicode( $r->decoded_content );
-        $data = XMLin( $response );
-    } else {
-        $data = XMLin( $r->decoded_content );
-    }
-
-    return $data;
+    return XMLin( $r->content );
 }
 
 sub search {
@@ -72,17 +57,8 @@ sub search {
 
 
     my $r = LWP::UserAgent->new->get( $uri );
-    my $response;
 
-    if ($self->charset_map) {
-        my $map = Unicode::Map->new( $self->charset_map );
-        my $data = $map->to_unicode( $r->decoded_content );
-        $response = SRU::Client::Response::searchRetrieve->new_from_xml( $data );
-    } else {
-        $response = SRU::Client::Response::searchRetrieve->new_from_xml( $r->decoded_content );
-    }
-
-    return $response;
+    return SRU::Client::Response::searchRetrieve->new_from_xml( $r->content );
 }
 
 1;
